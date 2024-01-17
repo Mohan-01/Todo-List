@@ -1,38 +1,126 @@
-.App {
-  text-align: center;
+:root {
+  --color-bg: #242424;
+  --color-text: #fff;
+  --color-card-header-active: green;
+  --color-card-header-due: rgb(201, 0, 0);
+  --color-card-header-completed: rgb(92, 92, 92);
+  --color-button-bg: #a5a5a5;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  margin: 1em auto;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Header.jsx */
+
+.main-heading {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  text-align: center;
+  position: relative;
 }
 
-.App-link {
-  color: #61dafb;
+.main-heading .add-btn {
+  position: absolute;
+  right: 1em;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.main-heading .add-btn button {
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  font-size: 1em;
+  padding: .5em 1em;
+  color: var(--color-text);
+  border: 1px solid var(--color-text);
+  border-radius: .5em;
+  font-weight: 550;
+}
+
+.main-heading .add-btn button:hover {
+  background-color: var(--color-text);
+  color: var(--color-bg);
+  box-shadow: 0 0 2px #fff;
+}
+
+/* App.js */
+.tasks {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2em;
+  column-gap: 4em;
+  padding: 2em;
+  background-color: var(--color-bg);  
+  margin: auto;
+  margin-left: 2em;
+}
+
+/* Card.jsx */
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--color-bg);
+  box-shadow: 1px 1px 1px #fff;
+  border-top-right-radius: 1em;
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.card .name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .5em 1em;
+  font-size: 1.2em;
+  width: 100%;
+  background-color: var(--color-card-header-completed);
+}
+
+.card .description{
+  position: relative;
+  padding: 1em;
+}
+
+.card .menu {
+  position: absolute;
+  background-color: #cbcbcb;
+  color: #242424;
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  font-size: 1.1em;
+  top: 0;
+  right: 0;
+  height: 5em;
+  z-index: 10;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  width: .2em;
+  background-color: var(--color-bg);
+}
+
+.card .menu i {
+  padding: .2em .5em;
+  border-bottom: 1px solid black;
+}
+
+.card .card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
 }

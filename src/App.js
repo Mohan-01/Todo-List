@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
+import Header from './Components/Header';
+import {getAllTodos } from './utils/handleFuncitons'
 import './App.css';
+import Card from './Components/Card';
+import Form from './Components/Form';
 
 function App() {
+
+  const [tasks, setTasks] = useState(null);
+  const [form, setForm] = useState(false);
+  const [formHeading, setFormHeading] = useState('Add Task');
+  const [taskId, setTaskId] = useState(null);
+
+  useEffect(() => {
+    async function getData() {
+      const tasks = await getAllTodos()
+      setTasks(tasks);
+    }
+    getData();
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="main">
+      {form && <Form formHeading={formHeading} taskId={taskId} setForm={setForm} setTasks={setTasks} />}
+      <Header setForm={setForm} />
+      <div className="tasks">
+        {
+          tasks && tasks.map(task => <Card task={task} setTasks={setTasks} setTaskId={setTaskId} setFormHeading={setFormHeading} setForm={setForm} key={task._id} />)
+        }
+      </div>
     </div>
   );
 }
