@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const baseURL = 'http://localhost:2401/api/v1/todos'
+// const baseURL = 'http://localhost:2401/api/v1/todos'
+const baseURL = 'https://todo-api-0c21.onrender.com/api/v1/todos'
 
 const Axios = axios.create({
     baseURL,
