@@ -1,4 +1,6 @@
 import React from 'react'
+import { IoIosCloseCircle } from "react-icons/io";
+
 import { handleFormSubmitButton } from '../utils/handleFuncitons'
 
 const Form = ({formHeading, taskId, setForm, setTasks}) => {
@@ -15,13 +17,17 @@ const Form = ({formHeading, taskId, setForm, setTasks}) => {
         setForm(false);
     }
 
+    const stopPropagation = (e) => {
+        e.stopPropagation();
+      };
+
   return (
-    <div className='modal'>
-        <form onSubmit={handleSubmit}>
-        <div className='modal-header'>
-            <h3>{formHeading}</h3>
-            <i className="fas fa-times" onClick={() => setForm(false)}></i>
-        </div>
+    <div className='modal' onClick={() => setForm(false)}>
+        <form onSubmit={handleSubmit} onClick={stopPropagation}>
+            <div className='modal-header'>
+                <h3 className='form-header'>{formHeading}</h3>
+            </div>
+                <i className='close-form' title='Close' onClick={() => setForm(false)}><IoIosCloseCircle /></i>
             <table>
                 <thead></thead>
                 <tbody>
@@ -37,12 +43,14 @@ const Form = ({formHeading, taskId, setForm, setTasks}) => {
                         <td>Due Date: </td>
                         <td><input type="datetime-local" name='dueDate' /></td>
                     </tr>
+                    {
+                        formHeading === 'Edit Task' && 
+                        <tr>
+                            <td>Completed: </td>
+                            <td><input type="checkbox" name='completed' /></td>
+                        </tr>
+                    }
                     <tr>
-                        <td>Completed: </td>
-                        <td><input type="checkbox" name='completed' /></td>
-                    </tr>
-                    <tr>
-                        <td></td>
                         <td><input type="submit" value={'Submit'} /></td>
                     </tr>
                 </tbody>

@@ -22,8 +22,8 @@ function App() {
 
   return (
     <div className="main">
-      {form && <Form formHeading={formHeading} taskId={taskId} setForm={setForm} setTasks={setTasks} />}
       <Header setForm={setForm} />
+      {form && <Form formHeading={formHeading} taskId={taskId} setForm={setForm} setTasks={setTasks} />}
       <div className="tasks">
         {
           tasks && tasks.map(task => <Card task={task} setTasks={setTasks} setTaskId={setTaskId} setFormHeading={setFormHeading} setForm={setForm} key={task._id} />)
